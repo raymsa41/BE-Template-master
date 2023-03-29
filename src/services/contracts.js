@@ -97,6 +97,7 @@ const getById = async (id, profileId = null) => {
 }
 
 module.exports = {
+    contractPublicAttributes,
     getListByProfileId,
     getById
 }

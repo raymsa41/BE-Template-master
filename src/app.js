@@ -1,8 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const {sequelize, Profile, Contract} = require('./model')
+const {sequelize, Profile, Contract, Job} = require('./model')
 const {getProfile} = require('./middleware/getProfile')
 const contracts = require('./routes/contracts')
+const jobs = require('./routes/jobs')
 
 const Sequelize = require('sequelize');
 
@@ -12,6 +13,7 @@ app.set('sequelize', sequelize)
 app.set('models', sequelize.models)
 
 app.use('/contracts', getProfile, contracts)
+app.use('/jobs', getProfile, jobs)
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
@@ -52,33 +54,14 @@ const foo = async () => {
 
     console.log(profile.toJSON())
 
-    const contracts = await Contract.findAll({
+    const jobs = await Job.findAll({
         where: {
-            [Sequelize.Op.and]: [
-                {
-                    [Sequelize.Op.or]: [
-                        {
-                            ClientId: 1
-                        },
-                        {
-                            ContractorId: 1
-                        }
-                    ]
-                },
-                {
-                    status: {
-                        [Sequelize.Op.not]: 'terminated'
-                    }
-                }
-            ],
-            
-        },
-        include: []
+        
+        }
     })
-    
-    console.log(contracts.map(c => c.toJSON()))
+    console.log(jobs)
 }
-// foo()
+foo()
 
 
 module.exports = app;
