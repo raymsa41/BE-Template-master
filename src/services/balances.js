@@ -30,7 +30,7 @@ const deposit = async (sequelize, userId, amount) => {
             transaction: t
         })
 
-        user.increment('balance', { by: amount, transaction: t })
+        const increment = await user.increment('balance', { by: amount, transaction: t })
 
         t.commit()
 
