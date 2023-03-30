@@ -24,7 +24,6 @@ const unpaid = async (req, res, next) => {
 const pay = async (req, res, next) => {
 	try {
 		const { job_id } = req.params
-		const sequelize = req.app.get('sequelize')
 
 		if (!job_id) {
 			throw new CustomError('No job_id sent', 400)
@@ -36,7 +35,7 @@ const pay = async (req, res, next) => {
 
 		const { id: profileId } = req.profile
 
-		const job = await jobsService.payJob(sequelize, job_id, profileId)
+		const job = await jobsService.payJob(job_id, profileId)
 
 		res.json({
 			status: 'success',

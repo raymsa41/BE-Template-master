@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
-const { Contract, Profile, Job } = require('../model')
+const { Profile, Job, sequelize } = require('../model')
 const CustomError = require('../utils/customError')
 
-const deposit = async (sequelize, userId, amount) => {
+const deposit = async (userId, amount) => {
 	const t = await sequelize.transaction()
 
 	try {

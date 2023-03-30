@@ -5,7 +5,6 @@ const deposit = async (req, res, next) => {
 	try {
 		const { userId } = req.params
 		const { amount } = req.body
-		const sequelize = req.app.get('sequelize')
 
 		if (!userId) {
 			throw new CustomError('No user id sent', 400)
@@ -15,7 +14,7 @@ const deposit = async (req, res, next) => {
 			throw new CustomError('No amount sent', 400)
 		}
 
-		const balance = await balanceService.deposit(sequelize, userId, amount)
+		const balance = await balanceService.deposit(userId, amount)
 
 		res.json({
 			status: 'success',

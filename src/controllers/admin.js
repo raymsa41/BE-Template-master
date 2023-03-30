@@ -4,9 +4,7 @@ const CustomError = require('../utils/customError')
 const bestProfession = async (req, res, next) => {
 	try {
 		const { start, end } = req.query
-		const sequelize = req.app.get('sequelize')
 		const bestProfession = await adminService.getBestProfession(
-			sequelize,
 			start,
 			end
 		)
@@ -27,10 +25,8 @@ const bestProfession = async (req, res, next) => {
 const bestClients = async (req, res, next) => {
 	try {
 		const { start, end, limit } = req.query
-		const sequelize = req.app.get('sequelize')
 
 		const bestClients = await adminService.getBestClients(
-			sequelize,
 			start,
 			end,
 			limit

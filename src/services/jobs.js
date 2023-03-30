@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const { Contract, Profile, Job } = require('../model')
+const { Contract, Job, sequelize } = require('../model')
 const { contractPublicAttributes } = require('./contracts')
 const CustomError = require('../utils/customError')
 
@@ -55,7 +55,7 @@ const getJobsUnpaidByProfileId = async (profileId) => {
 	} catch (error) {}
 }
 
-const payJob = async (sequelize, jobId, profileId) => {
+const payJob = async (jobId, profileId) => {
 	const t = await sequelize.transaction()
 
 	try {

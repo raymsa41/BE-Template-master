@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize')
 const CustomError = require('../utils/customError')
+const { sequelize } = require('../model')
 
-const getBestProfession = async (sequelize, start, end) => {
+const getBestProfession = async (start, end) => {
 	try {
 		if (!start || !end) {
 			throw new CustomError('Missing start or end date', 400)
@@ -48,7 +49,7 @@ const getBestProfession = async (sequelize, start, end) => {
 	}
 }
 
-const getBestClients = async (sequelize, start, end, limit = 2) => {
+const getBestClients = async (start, end, limit = 2) => {
 	try {
 		if (!start || !end) {
 			throw new CustomError('Missing start or end date', 400)
