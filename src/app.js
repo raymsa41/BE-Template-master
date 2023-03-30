@@ -5,8 +5,7 @@ const {getProfile} = require('./middleware/getProfile')
 const contracts = require('./routes/contracts')
 const jobs = require('./routes/jobs')
 const admin = require('./routes/admin')
-
-const Sequelize = require('sequelize');
+const balance = require('./routes/balances')
 
 const app = express();
 app.use(bodyParser.json());
@@ -15,6 +14,7 @@ app.set('models', sequelize.models)
 
 app.use('/contracts', getProfile, contracts)
 app.use('/jobs', getProfile, jobs)
+app.use('/balances', balance)
 app.use('/admin', admin)
 
 /* Error handler middleware */
@@ -30,26 +30,6 @@ app.use((err, req, res, next) => {
 
     return
 })
-
-
-const foo = async () => {
-    const profile = await Profile.findOne({
-        where: {id: 1},
-        // include: Contract
-        // include: [Contract]
-        include: ['Contractor', 'Client']
-    })
-
-    console.log(profile.toJSON())
-
-    const jobs = await Job.findAll({
-        where: {
-        
-        }
-    })
-    console.log(jobs)
-}
-// foo()
 
 
 module.exports = app;
