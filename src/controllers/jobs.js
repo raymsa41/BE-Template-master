@@ -21,6 +21,34 @@ const unpaid = async (req, res, next) => {
     }
 }
 
+const pay = async (req, res, next) => {
+    try {
+        const { job_id } = req.params
+        const sequelize = req.app.get('sequelize')
+
+        if (!job_id) {
+            throw new CustomError('No job_id sent', 400)
+        }
+
+        if (!req.profile && !req.profile.id) {
+            throw new CustomError('No profile found', 401)
+        }
+
+        const { id: profileId } = req.profile
+
+        const job = await jobsService.payJob(sequelize, job_id, profileId)
+
+        res.json({
+            status: 'success'
+        })
+
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+}
+
 module.exports = {
-    unpaid
+    unpaid,
+    pay
 }

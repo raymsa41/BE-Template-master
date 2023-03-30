@@ -61,7 +61,7 @@ const foo = async () => {
     })
     console.log(jobs)
 }
-foo()
+// foo()
 
 
 module.exports = app;
