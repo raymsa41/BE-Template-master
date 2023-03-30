@@ -1,7 +1,12 @@
 const request = require('supertest')
 const app = require('../app')
+const seed = require('../../seeders/seed')
 
 describe('Contracts Endpoint', () => {
+    beforeAll(() => {
+        return seed()
+    })
+
     it('User not authenticated', async () => {
         const res = await request(app).get('/contracts')
         expect(res.statusCode).toEqual(401)
