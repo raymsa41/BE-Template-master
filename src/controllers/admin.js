@@ -21,6 +21,25 @@ const bestProfession = async (req, res, next) => {
     }
 }
 
+const bestClients = async (req, res, next) => {
+    try {
+        const { start, end, limit } = req.query
+        const sequelize = req.app.get('sequelize')
+
+        const bestClients = await adminService.getBestClients(sequelize, start, end, limit)
+
+        if (bestClients.length === 0) {
+            throw new CustomError('No data found', 404)
+        }
+
+        res.json(bestClients)
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+}
+
 module.exports = {
-    bestProfession
+    bestProfession,
+    bestClients
 }

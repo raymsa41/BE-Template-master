@@ -124,3 +124,9 @@ When you have finished the assignment, create a github repository and send us th
   
 
 Thank you and good luck! 🙏
+
+
+
+
+Upgraded nodemon, and express to the latest versions because of security
+concurrently upgrated only to versión 6 beacause of nodejs 10 is on the packages.json engine (althought, nodejs 10 is not LTS)
