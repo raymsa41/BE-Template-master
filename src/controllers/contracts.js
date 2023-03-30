@@ -35,7 +35,6 @@ const list = async (req, res, next) => {
 
         res.json(contracts)
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }

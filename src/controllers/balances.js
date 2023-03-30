@@ -21,7 +21,6 @@ const deposit = async (req, res, next) => {
             status: 'success'
         })
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }

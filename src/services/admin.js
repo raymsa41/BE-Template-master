@@ -44,7 +44,6 @@ const getBestProfession = async (sequelize, start, end) => {
 
         return bestProfession
     } catch (error) {
-        console.log(error)
         throw error
     }
 }
@@ -89,7 +88,6 @@ const getBestClients = async (sequelize, start, end, limit = 2) => {
 
         return bestClients
     } catch (error) {
-        console.log(error)
         throw error
     }
 }

@@ -16,7 +16,6 @@ const bestProfession = async (req, res, next) => {
             amount: bestProfession[0].amount
         })
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }
@@ -34,7 +33,6 @@ const bestClients = async (req, res, next) => {
 
         res.json(bestClients)
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }

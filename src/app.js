@@ -1,11 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const {sequelize, Profile, Contract, Job} = require('./model')
+const {sequelize} = require('./model')
 const {getProfile} = require('./middleware/getProfile')
 const contracts = require('./routes/contracts')
 const jobs = require('./routes/jobs')
 const admin = require('./routes/admin')
 const balance = require('./routes/balances')
+const logger = require('./utils/logger')
 
 const app = express();
 app.use(bodyParser.json());
@@ -22,7 +23,8 @@ app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500
     const errorMessage = statusCode !== 500 ? err.message : 'Internal server error'
 
-    console.error(errorMessage, err.stack)
+    logger.error(errorMessage)
+    logger.error(err.stack)
 
     res.status(statusCode).json({
         'message': errorMessage

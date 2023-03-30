@@ -36,7 +36,6 @@ const deposit = async (sequelize, userId, amount) => {
 
         return jobsPayable
     } catch (error) {
-        console.log(error)
         t.rollback()
         throw error
     }

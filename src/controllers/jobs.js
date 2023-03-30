@@ -16,7 +16,6 @@ const unpaid = async (req, res, next) => {
             jobsPayable
         })
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }
@@ -43,7 +42,6 @@ const pay = async (req, res, next) => {
         })
 
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }
