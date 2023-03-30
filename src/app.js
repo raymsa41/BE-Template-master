@@ -1,15 +1,15 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const {sequelize} = require('./model')
-const {getProfile} = require('./middleware/getProfile')
+const express = require('express')
+const bodyParser = require('body-parser')
+const { sequelize } = require('./model')
+const { getProfile } = require('./middleware/getProfile')
 const contracts = require('./routes/contracts')
 const jobs = require('./routes/jobs')
 const admin = require('./routes/admin')
 const balance = require('./routes/balances')
 const logger = require('./utils/logger')
 
-const app = express();
-app.use(bodyParser.json());
+const app = express()
+app.use(bodyParser.json())
 app.set('sequelize', sequelize)
 app.set('models', sequelize.models)
 
@@ -20,18 +20,20 @@ app.use('/admin', admin)
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
-    const statusCode = err.statusCode || 500
-    const errorMessage = statusCode !== 500 ? err.message : 'Internal server error'
+	const statusCode = err.statusCode || 500
+	const errorMessage =
+		statusCode !== 500 ? err.message : 'Internal server error'
 
-    logger.error(errorMessage)
-    logger.error(err.stack)
+	logger.error(errorMessage)
+	logger.error(err.stack)
 
-    res.status(statusCode).json({
-        'message': errorMessage
-    }).end()
+	res.status(statusCode)
+		.json({
+			message: errorMessage,
+		})
+		.end()
 
-    return
+	return
 })
 
-
-module.exports = app;
+module.exports = app

@@ -2,13 +2,13 @@ const Sequelize = require('sequelize')
 const CustomError = require('../utils/customError')
 
 const getBestProfession = async (sequelize, start, end) => {
-    try {
-        if (!start || !end) {
-            throw new CustomError('Missing start or end date', 400)
-        }
+	try {
+		if (!start || !end) {
+			throw new CustomError('Missing start or end date', 400)
+		}
 
-        const bestProfession = await sequelize.query(
-            `
+		const bestProfession = await sequelize.query(
+			`
                 SELECT
                     profile.id,
                     profile.firstName,
@@ -33,29 +33,29 @@ const getBestProfession = async (sequelize, start, end) => {
                     amount DESC
                 LIMIT 1
             `,
-            {
-                replacements: { 
-                    start,
-                    end
-                 },
-                type: Sequelize.QueryTypes.SELECT
-            }
-        )
+			{
+				replacements: {
+					start,
+					end,
+				},
+				type: Sequelize.QueryTypes.SELECT,
+			}
+		)
 
-        return bestProfession
-    } catch (error) {
-        throw error
-    }
+		return bestProfession
+	} catch (error) {
+		throw error
+	}
 }
 
 const getBestClients = async (sequelize, start, end, limit = 2) => {
-    try {
-        if (!start || !end) {
-            throw new CustomError('Missing start or end date', 400)
-        }
+	try {
+		if (!start || !end) {
+			throw new CustomError('Missing start or end date', 400)
+		}
 
-        const bestClients = await sequelize.query(
-            `
+		const bestClients = await sequelize.query(
+			`
                 SELECT
                     profile.id,
                     profile.firstName || ' ' || profile.lastName AS fullName,
@@ -76,23 +76,23 @@ const getBestClients = async (sequelize, start, end, limit = 2) => {
                     paid DESC
                 LIMIT :limit
             `,
-            {
-                replacements: {
-                    start,
-                    end,
-                    limit
-                },
-                type: Sequelize.QueryTypes.SELECT
-            }
-        )
+			{
+				replacements: {
+					start,
+					end,
+					limit,
+				},
+				type: Sequelize.QueryTypes.SELECT,
+			}
+		)
 
-        return bestClients
-    } catch (error) {
-        throw error
-    }
+		return bestClients
+	} catch (error) {
+		throw error
+	}
 }
 
 module.exports = {
-    getBestProfession,
-    getBestClients
+	getBestProfession,
+	getBestClients,
 }
