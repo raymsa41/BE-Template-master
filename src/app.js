@@ -13,12 +13,15 @@ app.use(bodyParser.json())
 app.set('sequelize', sequelize)
 app.set('models', sequelize.models)
 
+// top level routes
 app.use('/contracts', getProfile, contracts)
 app.use('/jobs', getProfile, jobs)
 app.use('/balances', balance)
 app.use('/admin', admin)
 
-/* Error handler middleware */
+// Error handler middleware
+// catch errors from routes
+// check if it is safe to emit message to the api client
 app.use((err, req, res, next) => {
 	const statusCode = err.statusCode || 500
 	const errorMessage =

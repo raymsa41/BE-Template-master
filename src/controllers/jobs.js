@@ -3,6 +3,7 @@ const CustomError = require('../utils/customError')
 
 const unpaid = async (req, res, next) => {
 	try {
+        // check for missing profile (although we should have because of auth middleware)
 		if (!req.profile && !req.profile.id) {
 			throw new CustomError('No profile found', 401)
 		}
@@ -25,6 +26,7 @@ const pay = async (req, res, next) => {
 	try {
 		const { job_id } = req.params
 
+        // check for missing parameters
 		if (!job_id) {
 			throw new CustomError('No job_id sent', 400)
 		}

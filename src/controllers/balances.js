@@ -6,6 +6,7 @@ const deposit = async (req, res, next) => {
 		const { userId } = req.params
 		const { amount } = req.body
 
+        // check parameters
 		if (!userId) {
 			throw new CustomError('No user id sent', 400)
 		}

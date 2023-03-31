@@ -4,10 +4,12 @@ const { sequelize } = require('../model')
 
 const getBestProfession = async (start, end) => {
 	try {
+        // check for missing parameters
 		if (!start || !end) {
 			throw new CustomError('Missing start or end date', 400)
 		}
 
+        // use a raw query because we have a 2 level nested query
 		const bestProfession = await sequelize.query(
 			`
                 SELECT
@@ -51,10 +53,12 @@ const getBestProfession = async (start, end) => {
 
 const getBestClients = async (start, end, limit = 2) => {
 	try {
+        // check for missing parameters
 		if (!start || !end) {
 			throw new CustomError('Missing start or end date', 400)
 		}
 
+        // use a raw query because we have a 2 level nested query
 		const bestClients = await sequelize.query(
 			`
                 SELECT

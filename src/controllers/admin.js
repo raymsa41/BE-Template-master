@@ -9,6 +9,7 @@ const bestProfession = async (req, res, next) => {
 			end
 		)
 
+        // check if there is data in the current time window
 		if (bestProfession.length === 0) {
 			throw new CustomError('No data found', 404)
 		}
@@ -32,6 +33,7 @@ const bestClients = async (req, res, next) => {
 			limit
 		)
 
+        // check if there is data in the current time window
 		if (bestClients.length === 0) {
 			throw new CustomError('No data found', 404)
 		}

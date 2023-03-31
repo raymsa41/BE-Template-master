@@ -1,3 +1,4 @@
+// authenticate user by profile id
 const getProfile = async (req, res, next) => {
 	try {
 		const { Profile } = req.app.get('models')

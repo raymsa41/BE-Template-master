@@ -5,6 +5,7 @@ const get = async (req, res, next) => {
 	try {
 		const { id } = req.params
 
+        // check for missing profile (although we should have because of auth middleware)
 		if (!req.profile && !req.profile.id) {
 			throw new CustomError('No profile found', 401)
 		}
@@ -13,6 +14,7 @@ const get = async (req, res, next) => {
 
 		const contract = await contractService.getById(id, profileId)
 
+        // check if there is information in the result
 		if (!contract) {
 			throw new CustomError('Contract not found', 404)
 		}
@@ -25,6 +27,7 @@ const get = async (req, res, next) => {
 
 const list = async (req, res, next) => {
 	try {
+        // check for missing profile (although we should have because of auth middleware)
 		if (!req.profile && !req.profile.id) {
 			throw new CustomError('No profile found', 401)
 		}

@@ -56,9 +56,11 @@ const getJobsUnpaidByProfileId = async (profileId) => {
 }
 
 const payJob = async (jobId, profileId) => {
+    // use a transaction for safely modify multiple tables
 	const t = await sequelize.transaction()
 
 	try {
+        // use transactions on reads to have consistent reads
 		const job = await Job.findOne({
 			where: {
 				id: jobId,
@@ -70,6 +72,7 @@ const payJob = async (jobId, profileId) => {
 			transaction: t,
 		})
 
+        // check for missing parameters
 		if (!job) {
 			throw new CustomError('Job not found', 404)
 		}
@@ -92,6 +95,9 @@ const payJob = async (jobId, profileId) => {
 			throw new CustomError('Insufficient funds', 401)
 		}
 
+        // use increment and decrement together with a transaction 
+        // instead of directly setting the value to ensure concurrency
+        // and avoid race conditions
 		const decrement = await client.decrement('balance', {
 			by: job.price,
 			transaction: t,

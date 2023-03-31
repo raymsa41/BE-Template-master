@@ -1,3 +1,5 @@
+// custom error class
+// pass status code
 class CustomError extends Error {
 	constructor(message, statusCode) {
 		super(message)
