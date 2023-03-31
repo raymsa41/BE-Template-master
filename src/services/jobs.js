@@ -77,6 +77,7 @@ const payJob = async (jobId, profileId) => {
 			throw new CustomError('Job not found', 404)
 		}
 
+        // only let the user pay the job 1 time
 		if (job.paid) {
 			throw new CustomError('Job already paid', 401)
 		}
