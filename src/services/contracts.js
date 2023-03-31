@@ -37,6 +37,7 @@ const includeClient = {
 
 const getListByProfileId = async (profileId) => {
 	try {
+        // only send to the API client relevant fields
 		const contracts = await Contract.findAll({
 			where: {
 				[Sequelize.Op.and]: [
@@ -67,6 +68,7 @@ const getListByProfileId = async (profileId) => {
 
 const getById = async (id, profileId = null) => {
 	try {
+        // conditionaly filter for profileId if we have one
 		const filter = [
 			{
 				id: id,
@@ -84,6 +86,7 @@ const getById = async (id, profileId = null) => {
 				],
 			})
 		}
+        // only send to the API client relevant fields
 		const contract = await Contract.findOne({
 			where: {
 				[Sequelize.Op.and]: filter,

@@ -13,6 +13,9 @@ const unpaid = async (req, res, next) => {
 		const { jobsReceivable, jobsPayable } =
 			await jobsService.getJobsUnpaidByProfileId(id)
 
+        // divide the missing user missing jobs in two
+        // one for the jobs the user needs to pay
+        // another one for the jobs the user will get payed for
 		res.json({
 			jobsReceivable,
 			jobsPayable,
