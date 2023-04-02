@@ -1,3 +1,13 @@
+## ***Notes***
+> Upgraded nodemon, and express to the latest versions because of security bugs
+
+> Concurrently upgrated only to versión 6 beacause of nodejs 10 is on the packages.json engine (althought, nodejs 10 is not LTS)
+
+> Things that I would like to do if I had more time
+> 1. Use Migrations
+> 2. Use Typescript
+> 3. CI
+
 # DEEL BACKEND TASK
 
   
@@ -127,6 +137,3 @@ Thank you and good luck! 🙏
 
 
 
-
-Upgraded nodemon, and express to the latest versions because of security
-concurrently upgrated only to versión 6 beacause of nodejs 10 is on the packages.json engine (althought, nodejs 10 is not LTS)
