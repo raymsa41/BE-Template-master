@@ -8,6 +8,9 @@ const deposit = async (userId, amount) => {
 
 	try {
         // use transaction on reads to have consistent reads
+        // warning: This can still led to logical race conditions depending on the level of isolation
+        // Isolation level needs to be set to Serializable
+        // Or use Select for update to lock the row
 		const jobsPayable = await Job.sum('price', {
 			where: {
 				paid: {
